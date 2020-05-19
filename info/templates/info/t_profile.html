@@ -1,0 +1,96 @@
+{% extends 'info/Testbase.html' %}
+{% load static %}
+{% block name %}Profile{% endblock %}
+{% block content %}
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Edit Profile</h4>
+                  <p class="card-category">Complete your profile</p>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Department</label>
+                          <p>{{ request.user.teacher.dept }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Username</label>
+                          <p>{{ request.user.teacher.name }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Email address</label>
+                         <p>{{ request.user.teacher.email }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Phone number</label>
+                          <p>{{ request.user.teacher.phone }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Date of birth</label>
+                          <p>{{ request.user.teacher.DOB }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Adress</label>
+                          <p>{{ request.user.teacher.address }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <textarea class="form-control" rows="5"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="#pablo">
+                    {% if request.user.student.sex == "Male" %}
+             <img src="{% static 'images/mike.jpg' %}" alt={{ request.user.student.name }}>
+            {% else %}
+             <img src="{% static 'images/girls.jpg' %}" alt={{ request.user.student.name }}>
+            {%endif%}
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category">Associate Professor </h6>
+                  <h4 class="card-title">{{ request.user.teacher.name }}</h4>
+                  <p class="card-description">
+
+                  </p>
+                  <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

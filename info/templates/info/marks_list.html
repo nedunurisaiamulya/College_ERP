@@ -1,0 +1,49 @@
+{% extends 'info/basestudent.html' %}
+
+{% block name %}Internal Marks{% endblock %}
+{% block content %}
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">All Internal Marks</h4>
+                  <p class="card-category"> Here is the Internal Marks displayed </p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course name</th>
+                        <th>Assignment 1</th>
+                        <th>Assignment 2</th>
+                        <th>Assignment 3</th>
+                        <th>Assignment 4</th>
+                        <th>Mid 1</th>
+                        <th>Mid 2</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for sc in sc_list %}
+                    <tr>
+                        <td>{{ sc.course_id }}</td>
+                        <td>{{sc.course.name}}</td>
+                        {% for m in sc.marks_set.all %}
+                            <td>{{ m.marks1 }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% empty %}
+                            <p>student has no courses</p>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+    {% endblock %}

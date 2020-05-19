@@ -1,0 +1,58 @@
+{% extends 'info/Testbase.html' %}
+{% load static %}
+{% block name %}Attendance Dates{% endblock %}
+{% block content %}
+
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Dates of Attendance</h4>
+                  <p class="card-category"> Here is the Attendance displayed </p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for a in att_list %}
+                    <tr>
+                        <td>{{ a.date }}</td>
+                        {% if a.status == 0 %}
+                            <td class="p-3 mb-2 bg-danger text-white">Not Marked</td>
+                            <td>
+                                <a class="btn btn-primary" href="{% url 't_attendance' a.id %}" role="button">Enter Attendance</a>
+                                <a class="btn btn-warning" href="{% url 'cancel_class' a.id %}">Cancel Class</a>
+                            </td>
+
+                        {% elif a.status == 1 %}
+                            <td class="p-3 mb-2 bg-success text-white">Marked</td>
+                            <td><a class="btn btn-secondary" href="{% url 'edit_att' a.id %}" role="button">Edit Attendance</a> </td>
+
+                        {% else %}
+                            <td class="p-3 mb-2 bg-warning text-white">Cancelled</td>
+                            <td><a class="btn btn-primary" href="{% url 't_attendance' a.id %}" role="button">Enter Attendance</a></td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                            <p>student has no courses</p>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+            </div>
+          </div>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'info/Testbase.html' %}
+{% block name %}
+{% if choice == 1 %}
+<p>Assign Attendance</p>
+{% elif choice == 2 %}<p>Internal Marks</p>
+{% elif choice == 3 %}<p>Select Class</p>
+{% endif %}{% endblock %}
+{% block content %}
+<div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                    {% if choice == 1 %}
+                  <h4 class="card-title ">Assign Attendance</h4>
+                  <p class="card-category"> Here is the table for Attendance class</p>
+                    {% elif choice == 2 %}
+                    <h4 class="card-title ">Internal Marks</h4>
+                  <p class="card-category"> Here is the table for Internal Marks</p>
+                    {% elif choice == 3 %}
+                    <h4 class="card-title ">Select class</h4>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Course</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for ass in teacher1.assign_set.all %}
+                    <tr>
+                        <td>{{ ass.class_id }}</td>
+                        <td>{{ ass.course }}</td>
+                        <td>
+                            {% if choice == 1 %}
+                                <a class="btn btn-primary" href="{% url 't_class_date' ass.id %}" role="button">Enter Attendance</a>
+                                <a class="btn btn-warning" href="{% url 't_extra_class' ass.id %}">Extra Class</a>
+                                <a class="btn btn-danger" href="{% url 't_student' ass.id %}">View Students</a>
+
+                            {% elif choice == 2 %}
+                                <a class="btn btn-primary" href="{% url 't_marks_list' ass.id %}" role="button">Enter Marks</a>
+                                <a class="btn btn-danger" href="{% url 't_student_marks' ass.id %}">View Students</a>
+                            {% elif choice == 3 %}
+                                <a class="btn btn-danger" href="{% url 'stud_In' ass.id %}">View Students</a>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                    {% empty %}
+                            <p>teacher has no courses</p>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+{% endblock %}
